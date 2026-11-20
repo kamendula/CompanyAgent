@@ -1,0 +1,41 @@
+{
+  "name": "enterprise-ai-workspace-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Enterprise AI Workspace \u2014 Windows \u684c\u9762\u5ba2\u6237\u7aef P0 \u8bd5\u7528\u7248\uff1a\u672c\u673a\u5de5\u4f5c\u533a + \u667a\u80fd\u62a5\u4ef7\u52a9\u624b",
+  "main": "electron/main.js",
+  "scripts": {
+    "postinstall": "node scripts/fix-electron-install.js || true",
+    "fix:electron": "node scripts/fix-electron-install.js",
+    "start": "electron .",
+    "test": "node --test tests/",
+    "test:e2e": "node tests/e2e.run.js",
+    "dist": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "docx": "^9.0.2",
+    "uuid": "^9.0.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8",
+    "playwright-core": "^1.48.0"
+  },
+  "build": {
+    "appId": "com.enterpriseai.workspace.desktop",
+    "productName": "Enterprise AI Workspace",
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "sample-data/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dir"
+    }
+  }
+}

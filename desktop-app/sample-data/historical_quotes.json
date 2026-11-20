@@ -1,0 +1,99 @@
+{
+  "asOf": "2026-11-18T09:00:00+08:00",
+  "sourceSystem": "CRM 示例环境 · 历史报价与成交记录",
+  "items": [
+    {
+      "id": "Q-24087",
+      "productCode": "WJ-2000",
+      "customer": "华东某装备制造集团",
+      "qty": 50,
+      "region": "华东",
+      "dueInDays": 30,
+      "paymentTerms": "款到发货",
+      "quoteDate": "2026-08-12",
+      "status": "closed",
+      "unitPrice": 16800,
+      "totalPrice": 840000
+    },
+    {
+      "id": "Q-24090",
+      "productCode": "WJ-2000",
+      "customer": "沪上精密机械有限公司",
+      "qty": 60,
+      "region": "华东",
+      "dueInDays": 45,
+      "paymentTerms": "月结30天",
+      "quoteDate": "2026-09-20",
+      "status": "closed",
+      "unitPrice": 16500,
+      "totalPrice": 990000
+    },
+    {
+      "id": "Q-24091",
+      "productCode": "WJ-2000",
+      "customer": "华南某自动化集成商",
+      "qty": 20,
+      "region": "华南",
+      "dueInDays": 20,
+      "paymentTerms": "款到发货",
+      "quoteDate": "2026-10-08",
+      "status": "open",
+      "statusNote": "客户议价未达成，报价已失效，仅作参考，不计入成交均价",
+      "unitPrice": 15800,
+      "totalPrice": 316000
+    },
+    {
+      "id": "Q-24095",
+      "productCode": "WJ-3000",
+      "customer": "华北重型装备股份公司",
+      "qty": 10,
+      "region": "华北",
+      "dueInDays": 40,
+      "paymentTerms": "月结30天",
+      "quoteDate": "2026-09-02",
+      "status": "closed",
+      "unitPrice": 24200,
+      "totalPrice": 242000
+    },
+    {
+      "id": "Q-24098",
+      "productCode": "SV-150",
+      "customer": "江浙伺服系统集成商",
+      "qty": 200,
+      "region": "华东",
+      "dueInDays": 25,
+      "paymentTerms": "款到发货",
+      "quoteDate": "2026-07-15",
+      "status": "closed",
+      "unitPrice": 5100,
+      "totalPrice": 1020000
+    },
+    {
+      "id": "Q-24102",
+      "productCode": "SV-300",
+      "customer": "珠三角智能制造企业",
+      "qty": 15,
+      "region": "华南",
+      "dueInDays": 30,
+      "paymentTerms": "月结30天",
+      "quoteDate": "2026-06-10",
+      "status": "open",
+      "statusNote": "客户项目延期，报价未成交",
+      "unitPrice": 8600,
+      "totalPrice": 129000
+    },
+    {
+      "id": "Q-24105",
+      "productCode": "PLC-X1",
+      "customer": "西南基础设施集团",
+      "qty": 100,
+      "region": "西南",
+      "dueInDays": 35,
+      "paymentTerms": "月结60天",
+      "quoteDate": "2026-10-01",
+      "status": "closed",
+      "unitPrice": 3850,
+      "totalPrice": 385000
+    }
+  ]
+}

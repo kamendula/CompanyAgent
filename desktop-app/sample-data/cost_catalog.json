@@ -1,0 +1,44 @@
+{
+  "asOf": "2026-11-18T09:00:00+08:00",
+  "sourceSystem": "ERP 示例环境 · 成本中心",
+  "visibility": "restricted",
+  "visibilityNote": "原始单位成本仅对「业务管理员」「数据管理员」及以上角色可见；销售角色只能看到授权计算后的价格区间与毛利是否达标。",
+  "available": true,
+  "items": {
+    "WJ-2000": {
+      "name": "工业变频器 WJ-2000",
+      "unit": "台",
+      "unitCost": 12500,
+      "stockQty": 86,
+      "currency": "CNY"
+    },
+    "WJ-3000": {
+      "name": "工业变频器 WJ-3000（高功率型）",
+      "unit": "台",
+      "unitCost": 18800,
+      "stockQty": 34,
+      "currency": "CNY"
+    },
+    "SV-150": {
+      "name": "伺服驱动器 SV-150",
+      "unit": "套",
+      "unitCost": 4200,
+      "stockQty": 210,
+      "currency": "CNY"
+    },
+    "SV-300": {
+      "name": "伺服驱动器 SV-300",
+      "unit": "套",
+      "unitCost": 6800,
+      "stockQty": 57,
+      "currency": "CNY"
+    },
+    "PLC-X1": {
+      "name": "可编程控制器 PLC-X1",
+      "unit": "台",
+      "unitCost": 3100,
+      "stockQty": 120,
+      "currency": "CNY"
+    }
+  }
+}

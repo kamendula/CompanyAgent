@@ -1,0 +1,20 @@
+{
+  "ruleVersion": "PRICING-2026.11-01",
+  "effectiveDate": "2026-11-01",
+  "owner": "业务管理员 · 定价规则组",
+  "targetMargin": 0.28,
+  "marginFloor": 0.20,
+  "maxDiscountWithoutApproval": 0.05,
+  "currency": "CNY",
+  "roundingStep": 1,
+  "similarityWeights": {
+    "productMatch": 0.4,
+    "quantityProximity": 0.2,
+    "regionMatch": 0.15,
+    "dueDateProximity": 0.1,
+    "paymentTermsMatch": 0.1,
+    "recency": 0.05
+  },
+  "minClosedCasesForTrustedReference": 2,
+  "notes": "首版试点规则：目标毛利 28%，毛利低于 20% 强制升级审批；相似度权重与阈值需业务侧在试点中复核校准。"
+}

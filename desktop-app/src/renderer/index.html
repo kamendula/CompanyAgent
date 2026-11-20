@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+<title>Enterprise AI Workspace</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- 顶部：Windows 风格标题栏 + 全局状态 -->
+    <header class="titlebar">
+      <div class="titlebar-left">
+        <span class="brand-dot"></span>
+        <span class="brand-name">Enterprise AI Workspace</span>
+        <span class="brand-sub">企业 AI 原生协作平台 · 桌面客户端 P0 试用版</span>
+      </div>
+      <div class="titlebar-right">
+        <div class="status-pill" id="dshStatusPill" title="本机 DSH / Agent 执行状态">
+          <span class="dot dot-ok"></span>本机执行就绪
+        </div>
+        <div class="status-pill" id="connStatusPill" title="企业服务端连接状态">
+          <span class="dot dot-ok"></span>企业已连接
+        </div>
+        <div class="win-controls" aria-hidden="true">
+          <span>—</span><span>☐</span><span>×</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+      <!-- 左侧导航 -->
+      <nav class="sidenav">
+        <button class="nav-item active" data-view="home">
+          <span class="nav-icon">🏠</span>本机工作区
+        </button>
+        <button class="nav-item" data-view="quote">
+          <span class="nav-icon">💬</span>智能报价助手
+        </button>
+        <button class="nav-item" data-view="archive">
+          <span class="nav-icon">🗂</span>项目空间 / 归档
+        </button>
+        <button class="nav-item" data-view="audit">
+          <span class="nav-icon">🧾</span>审计日志
+        </button>
+
+        <div class="nav-divider"></div>
+        <div class="nav-section-title">演示控制（非生产功能）</div>
+
+        <label class="nav-control">
+          当前角色
+          <select id="roleSelect"></select>
+        </label>
+
+        <label class="nav-control toggle-row">
+          <span>模拟断网</span>
+          <input type="checkbox" id="offlineToggle" />
+        </label>
+        <label class="nav-control toggle-row">
+          <span>模拟成本源故障</span>
+          <input type="checkbox" id="costFailToggle" />
+        </label>
+      </nav>
+
+      <!-- 主内容区 -->
+      <main class="content">
+
+        <!-- 视图：本机工作区 -->
+        <section class="view" id="view-home">
+          <h1 class="view-title">本机工作区</h1>
+          <p class="view-subtitle">从本机文件开始：拖入或选择客户需求 Excel，即可发起智能报价。原件默认保留在本机，仅在你确认后，才会把必要字段发送给企业服务。</p>
+
+          <div class="dropzone" id="homeDropzone">
+            <div class="dropzone-icon">⤓</div>
+            <div class="dropzone-text">将客户需求 Excel 拖到这里，或</div>
+            <button class="btn btn-primary" id="homeSelectFileBtn">选择本机文件…</button>
+            <div class="dropzone-hint">支持 .xlsx / .xls；文件只在本机解析</div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2>已授权的本机目录</h2>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <select id="folderPurposeSelect">
+                  <option value="temporary">临时读取</option>
+                  <option value="personal_index">个人索引</option>
+                  <option value="project_share">项目共享</option>
+                </select>
+                <button class="btn btn-secondary" id="addFolderBtn">+ 新增目录授权</button>
+              </div>
+            </div>
+            <table class="simple-table" id="folderTable">
+              <thead><tr><th>目录</th><th>用途</th><th>授权时间</th><th>状态</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <p class="hint-text">用途分三类：临时读取（仅本次任务）、个人索引（供本人检索）、项目共享（团队可见，需说明范围与保留策略）。撤销后将停止访问并清理对应本机缓存与索引（演示环境以标记代替真实清理）。</p>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header"><h2>最近报价</h2></div>
+            <div id="homeRecentQuotes" class="hint-text">暂无记录</div>
+          </div>
+        </section>
+
+        <!-- 视图：智能报价助手 -->
+        <section class="view hidden" id="view-quote">
+          <h1 class="view-title">智能报价助手</h1>
+          <div class="quote-columns">
+
+            <!-- 左栏 -->
+            <div class="col col-left">
+              <h3>1 · 客户需求</h3>
+              <div class="dropzone small" id="quoteDropzone">
+                <div class="dropzone-text">拖入 / 选择客户需求 Excel</div>
+                <button class="btn btn-secondary" id="quoteSelectFileBtn">选择文件…</button>
+              </div>
+              <div id="quoteFileInfo" class="hint-text"></div>
+
+              <div id="confirmForm" class="hidden">
+                <h4>确认标准化字段</h4>
+                <p class="hint-text">系统已从 Excel 解析出以下字段，请确认无误。确认后，仅以下字段会发送给企业服务用于计算；原始 Excel 文件始终保留在本机。</p>
+                <label>客户<input type="text" id="f_customer" /></label>
+                <label>产品编号<input type="text" id="f_productCode" /></label>
+                <label>数量<input type="number" id="f_qty" /></label>
+                <label>地区<input type="text" id="f_region" /></label>
+                <label>交期（天）<input type="number" id="f_dueInDays" /></label>
+                <label>付款条件<input type="text" id="f_paymentTerms" /></label>
+                <div id="confirmNotes" class="confirm-notes"></div>
+                <button class="btn btn-primary" id="confirmAndCalcBtn">确认字段并发起测算</button>
+              </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="col col-middle">
+              <h3>2 · 报价结果</h3>
+              <div id="quoteResult" class="hint-text">请先在左侧选择客户需求文件。</div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="col col-right">
+              <h3>3 · 依据与证据</h3>
+              <div id="evidencePanel" class="hint-text">暂无数据</div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 视图：项目空间 / 归档 -->
+        <section class="view hidden" id="view-archive">
+          <h1 class="view-title">项目空间 / 归档</h1>
+          <p class="view-subtitle">已提交的报价与审批结果以企业服务端记录为准；正式文件导出后在此归档，可追溯依据、规则版本与审批记录。</p>
+          <table class="simple-table" id="archiveTable">
+            <thead><tr><th>报价编号</th><th>客户</th><th>产品</th><th>状态</th><th>总价</th><th>创建时间</th><th>操作</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <!-- 视图：审计日志 -->
+        <section class="view hidden" id="view-audit">
+          <h1 class="view-title">审计日志</h1>
+          <p class="view-subtitle">记录身份、动作、数据时间与结果状态，对应企业服务端的可追溯要求。</p>
+          <table class="simple-table" id="auditTable">
+            <thead><tr><th>#</th><th>时间</th><th>操作人</th><th>动作</th><th>详情</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+      </main>
+    </div>
+
+    <footer class="statusbar">
+      <span id="statusbarMessage">就绪</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
